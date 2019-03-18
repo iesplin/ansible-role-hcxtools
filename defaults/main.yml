@@ -1,5 +1,4 @@
 ---
 # defaults file for ansible-role-hcxtools
 
-hcxtools_local_src_dir: /usr/local/src
-hcxtools_src_dir: '{{ hcxtools_local_src_dir }}/hcxtools'
+hcxtools_src_dir: "/usr/local/src/hcxtools"

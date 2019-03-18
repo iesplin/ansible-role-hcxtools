@@ -4,23 +4,24 @@
 
 - name: Install hcxtools dependencies
   apt:
-    name: '{{ hcxtools_packages }}'
+    name: "{{ hcxtools_packages }}"
 
 - name: Clone hcxtools repo
   git:
-    repo: '{{ hcxtools_repo_url }}'
-    dest: '{{ hcxtools_src_dir }}'
-    version: '{{ hcxtools_repo_version }}'
+    repo: "{{ hcxtools_repo_url }}"
+    dest: "{{ hcxtools_src_dir }}"
+    version: "{{ hcxtools_repo_version }}"
+  changed_when: false
   register: clone_hcxtools
 
-- name: Make hcxtools
-  command: make
-  args:
-    chdir: '{{ hcxtools_src_dir }}'
-  when: clone_hcxtools is changed
+- block:
+    - name: Make hcxtools
+      command: make
+      args:
+        chdir: "{{ hcxtools_src_dir }}"
 
-- name: Install hcxtools
-  command: make install
-  args:
-    chdir: '{{ hcxtools_src_dir }}'
-  when: clone_hcxtools is changed
+    - name: Install hcxtools
+      command: make install
+      args:
+        chdir: "{{ hcxtools_src_dir }}"
+  when: "clone_hcxtools.before != clone_hcxtools.after"
