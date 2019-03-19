@@ -23,4 +23,4 @@
       command: make install
       args:
         chdir: "{{ hcxtools_src_dir }}"
-  when: "clone_hcxtools.before != clone_hcxtools.after"
+  when: "clone_hcxtools is changed"
