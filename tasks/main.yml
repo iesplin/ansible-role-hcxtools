@@ -11,7 +11,6 @@
     repo: "{{ hcxtools_repo_url }}"
     dest: "{{ hcxtools_src_dir }}"
     version: "{{ hcxtools_repo_version }}"
-  changed_when: false
   register: clone_hcxtools
 
 - block:
